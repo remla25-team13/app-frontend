@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { AppService } from './app.service';
+import { PromptFormComponent } from './prompt-form/prompt-form.component';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet],
+  imports: [RouterOutlet, PromptFormComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
-  providers: [AppService]
 })
 export class AppComponent implements OnInit {
   public version: string = 'v0.0.0';
