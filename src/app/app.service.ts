@@ -10,8 +10,8 @@ export class AppService {
     private readonly http: HttpClient = inject(HttpClient)
     private readonly API_URL = environment.API_URL
 
-    public getVersion(): Observable<string> {
-        return this.http.get<string>(`${this.API_URL}/version`)
+    public getVersion(): Observable<{version: string}>  {
+        return this.http.get<{version: string}>(`${this.API_URL}/version`)
     }
 
     public queryModel(body: { review: string }): Observable<{ result: boolean | null, review: string }> {
