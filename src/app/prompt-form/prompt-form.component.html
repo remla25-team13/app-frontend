@@ -1,0 +1,24 @@
+<form [formGroup]="form" (ngSubmit)="submit()">
+    <div>
+        <label for="prompt">Prompt: </label>
+        <input id="prompt" type="text" formControlName="prompt" />
+
+        <button (click)="queryModel()">Query model</button>
+    </div>
+
+    <div>
+        {{'This review is '}}
+        <select formControlName="prediction">
+            <option value="null" *ngIf="!hideUndefined">Undefined</option>
+            <option value="true">Positive</option>
+            <option value="false">Negative</option>
+        </select>
+        {{'. If you disagree, please update the value. We kindly ask you to submit your review to our dataset, so we
+        could
+        improve our model!'}}
+    </div>
+
+    <div class="controls">
+        <button type="submit">Submit</button>
+    </div>
+</form>
