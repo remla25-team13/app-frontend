@@ -11,7 +11,7 @@ export class AppService {
     private readonly API_URL = environment.API_URL
 
     public getVersion(): Observable<{version: string}>  {
-        return this.http.get<{version: string}>(`${this.API_URL}/version`)
+        return this.http.get<{version: string}>(`${this.API_URL}/version/app-service`)
     }
 
     public queryModel(body: { review: string }): Observable<{ result: boolean | null, review: string }> {
