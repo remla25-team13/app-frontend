@@ -1,4 +1,4 @@
-import { Component, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { AppService } from '../app.service';
 import { CommonModule } from '@angular/common';
@@ -10,9 +10,12 @@ import { CommonModule } from '@angular/common';
   styleUrl: './prompt-form.component.css',
 })
 export class PromptFormComponent implements OnChanges {
+   @Input() modelType: string = '';
+   
   form = new FormGroup({
     prompt: new FormControl(),
-    prediction: new FormControl<boolean | null>({value: null, disabled: true})
+    corrected: new FormControl<boolean | null>({value: null, disabled: true}),
+    original: new FormControl<boolean | null>({value: null, disabled: true})
   })
 
   hideUndefined: boolean = false
@@ -28,13 +31,24 @@ export class PromptFormComponent implements OnChanges {
 
     this.appService.queryModel({ review: body.prompt })
       .subscribe(res => {
-        this.form.controls.prediction.setValue(res.result)
-        this.form.controls.prediction.enable()
+        this.form.controls.original.setValue(res.result)
+
+        this.form.controls.corrected.setValue(res.result)
+        this.form.controls.corrected.enable()
+
         this.hideUndefined = true
       })
   }
 
   submit(): void {
-    console.log('a')
+    this.appService.submit({
+      review: this.form.controls.prompt.value, 
+      corrected: this.form.controls.corrected.value ?? false,
+      original: this.form.controls.original.value ?? false,
+      modelType: this.modelType
+    }).subscribe(res => {
+      console.log(res)
+    })
+
   }
 }

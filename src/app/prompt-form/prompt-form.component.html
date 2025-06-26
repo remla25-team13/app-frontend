@@ -8,7 +8,7 @@
 
     <div>
         {{'This review is '}}
-        <select formControlName="prediction">
+        <select formControlName="corrected">
             <option value="null" *ngIf="!hideUndefined">Undefined</option>
             <option value="true">Positive</option>
             <option value="false">Negative</option>
@@ -17,7 +17,7 @@
         could
         improve our model!'}}
     </div>
-
+    <input type="hidden" formControlName="original">
     <div class="controls">
         <button type="submit">Submit</button>
     </div>
