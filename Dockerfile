@@ -17,6 +17,6 @@ FROM nginx:alpine AS runtime
 COPY --from=base /app/dist/my-angular-app/browser /usr/share/nginx/html
 COPY nginx.conf /etc/nginx/templates/default.conf.template
 
-ENV API_HOST="http://localhost:8080"
+ENV API_HOST="http://localhost:5000"
 
 EXPOSE 80
