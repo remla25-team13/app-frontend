@@ -48,6 +48,7 @@ export class PromptFormComponent implements OnChanges {
       modelType: this.modelType
     }).subscribe(res => {
       console.log(res)
+      alert(res)
     })
 
   }

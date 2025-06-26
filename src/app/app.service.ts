@@ -24,7 +24,10 @@ export class AppService {
             );
     }
 
-    public submit(body: {review: string, modelType: string, corrected: boolean, original: boolean}): Observable<string> {
-        return this.http.post<string>(`${this.API_URL}/submit`, body)
+    public submit(body: { review: string, modelType: string, corrected: boolean, original: boolean }): Observable<string> {
+        return this.http.post<{ message: string }>(`${this.API_URL}/submit`, body)
+            .pipe(
+                map(response => response.message)
+            );
     }
 }
